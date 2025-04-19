@@ -95,15 +95,16 @@ struct AmbientMonitorView: View {
                     Button("OK", role: .cancel) {}
                 }
             }
+            //moved Log out button to account page, keeping the user always logged in.
 //            .navigationTitle("Live Sensor")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Log Out") {
-                        authVM.logout()
-                    }
-                    .foregroundColor(.red)
-                }
-            }
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button("Log Out") {
+//                        authVM.logout()
+//                    }
+//                    .foregroundColor(.red)
+//                }
+//            }
         }
     }
 

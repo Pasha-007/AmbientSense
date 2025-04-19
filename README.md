@@ -47,13 +47,13 @@
 
 ## 📦 Folder Structure
 
-AmbientSense/
-├── Models/
-├── ViewModels/
-├── Views/
-├── Resources/
-├── Assets.xcassets/
-├── AmbientSenseApp.swift
+AmbientSense/  
+├── Models/  
+├── ViewModels/  
+├── Views/  
+├── Resources/  
+├── Assets.xcassets/  
+├── AmbientSenseApp.swift  
 
 ---
 

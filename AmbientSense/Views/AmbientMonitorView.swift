@@ -12,24 +12,26 @@ struct AmbientMonitorView: View {
     @EnvironmentObject var authVM: AuthViewModel
     @StateObject private var viewModel = AmbientMonitorViewModel()
     @State private var isMonitoring = false
+    @StateObject private var measurementVM = MeasurementViewModel()
+    @State private var showSaveConfirmation = false
 
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 32) {
+                VStack(spacing: 24) {
                     Text("Ambient Monitor")
                         .font(.largeTitle)
                         .bold()
-                        .padding(.top, 20)
+                        .padding(.top, 10)
 
-                    // Noise Level Section
-                    VStack(spacing: 12) {
+                    // Noise Section
+                    VStack(spacing: 8) {
                         Text("Noise Level")
                             .font(.title3)
                             .foregroundColor(.gray)
 
                         Text("\(Int(viewModel.noiseDB)) dB")
-                            .font(.system(size: 48, weight: .semibold))
+                            .font(.system(size: 40, weight: .semibold))
                             .foregroundColor(noiseColor(for: viewModel.noiseDB))
 
                         Text(noiseStatusText(for: viewModel.noiseDB))
@@ -37,19 +39,19 @@ struct AmbientMonitorView: View {
                             .foregroundColor(.secondary)
                     }
 
-                    // Light Level Section
-                    VStack(spacing: 12) {
+                    // Light Section
+                    VStack(spacing: 8) {
                         Text("Light Level")
                             .font(.title3)
                             .foregroundColor(.gray)
 
                         CameraPreview(session: viewModel.cameraSession)
-                            .frame(height: 200)
-                            .cornerRadius(12)
-                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.3)))
+                            .frame(height: 180)
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray.opacity(0.3)))
 
                         Text("\(Int(viewModel.lux)) lux")
-                            .font(.system(size: 48, weight: .semibold))
+                            .font(.system(size: 40, weight: .semibold))
                             .foregroundColor(lightColor(for: viewModel.lux))
 
                         Text(lightStatusText(for: viewModel.lux))
@@ -57,23 +59,41 @@ struct AmbientMonitorView: View {
                             .foregroundColor(.secondary)
                     }
 
-                    Spacer()
+                    Spacer(minLength: 0)
 
+                    // Start/Stop Monitoring Button
                     Button(action: {
                         isMonitoring.toggle()
                         isMonitoring ? viewModel.startMonitoring() : viewModel.stopMonitoring()
                     }) {
                         Text(isMonitoring ? "Stop Monitoring" : "Start Monitoring")
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(.vertical, 12)
                             .background(isMonitoring ? Color.red : Color.blue)
                             .foregroundColor(.white)
-                            .cornerRadius(12)
+                            .cornerRadius(10)
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 40)
+
+                    // Save Measurement Button
+                    Button("Save Measurement") {
+                        measurementVM.saveMeasurement(
+                            lux: Double(viewModel.lux),
+                            decibel: Double(viewModel.noiseDB)
+                        )
+                        showSaveConfirmation = true
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.bottom)
+                .alert("Measurement Saved!", isPresented: $showSaveConfirmation) {
+                    Button("OK", role: .cancel) {}
+                }
             }
 //            .navigationTitle("Live Sensor")
             .toolbar {

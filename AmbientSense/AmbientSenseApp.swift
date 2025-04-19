@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct AmbientSenseApp: App {
+    @StateObject private var authVM = AuthViewModel()
+
+    init() {
+        FirebaseApp.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            RootView()
+                .environmentObject(authVM)  // Injected here once globally
         }
     }
 }

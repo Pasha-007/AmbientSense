@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5157C0432DAEFAC60007C8D0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5157C0422DAEFAC60007C8D0 /* README.md */; };
+		51A52E1A2DB38B6900A4D91C /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 51A52E192DB38B6900A4D91C /* FirebaseAuth */; };
+		51A52E1C2DB38B6900A4D91C /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 51A52E1B2DB38B6900A4D91C /* FirebaseCore */; };
+		51A52E1E2DB38B6900A4D91C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 51A52E1D2DB38B6900A4D91C /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51A52E1C2DB38B6900A4D91C /* FirebaseCore in Frameworks */,
+				51A52E1A2DB38B6900A4D91C /* FirebaseAuth in Frameworks */,
+				51A52E1E2DB38B6900A4D91C /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +90,9 @@
 			);
 			name = AmbientSense;
 			packageProductDependencies = (
+				51A52E192DB38B6900A4D91C /* FirebaseAuth */,
+				51A52E1B2DB38B6900A4D91C /* FirebaseCore */,
+				51A52E1D2DB38B6900A4D91C /* FirebaseFirestore */,
 			);
 			productName = AmbientSense;
 			productReference = 51CA32D42DAD9BC4000F0BB4 /* AmbientSense.app */;
@@ -113,6 +122,9 @@
 			);
 			mainGroup = 51CA32CB2DAD9BC4000F0BB4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				51A52E182DB38B6900A4D91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 51CA32D52DAD9BC4000F0BB4 /* Products */;
 			projectDirPath = "";
@@ -276,13 +288,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AmbientSense/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We use your camera to measure ambient light intensity.\n";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use your microphone to measure ambient noise levels.\n";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use the camera to measure light";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use the mic to measure noise";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,13 +320,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AmbientSense/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "We use your camera to measure ambient light intensity.\n";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use your microphone to measure ambient noise levels.\n";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We use the camera to measure light";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We use the mic to measure noise";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -350,6 +362,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		51A52E182DB38B6900A4D91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		51A52E192DB38B6900A4D91C /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51A52E182DB38B6900A4D91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		51A52E1B2DB38B6900A4D91C /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51A52E182DB38B6900A4D91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		51A52E1D2DB38B6900A4D91C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51A52E182DB38B6900A4D91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 51CA32CC2DAD9BC4000F0BB4 /* Project object */;
 }

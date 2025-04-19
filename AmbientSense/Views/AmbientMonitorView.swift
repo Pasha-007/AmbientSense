@@ -3,75 +3,88 @@
 //  AmbientSense
 //
 //  Created by Muntahaa Khan on 15/4/25.
-//
+//import SwiftUI
+
 import SwiftUI
+import FirebaseAuth
 
 struct AmbientMonitorView: View {
+    @EnvironmentObject var authVM: AuthViewModel
     @StateObject private var viewModel = AmbientMonitorViewModel()
     @State private var isMonitoring = false
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                Text("Ambient Monitor")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.top, 20)
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 32) {
+                    Text("Ambient Monitor")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top, 20)
 
-                // Noise Level Section
-                VStack(spacing: 12) {
-                    Text("Noise Level")
-                        .font(.title3)
-                        .foregroundColor(.gray)
+                    // Noise Level Section
+                    VStack(spacing: 12) {
+                        Text("Noise Level")
+                            .font(.title3)
+                            .foregroundColor(.gray)
 
-                    Text("\(Int(viewModel.noiseDB)) dB")
-                        .font(.system(size: 48, weight: .semibold))
-                        .foregroundColor(noiseColor(for: viewModel.noiseDB))
+                        Text("\(Int(viewModel.noiseDB)) dB")
+                            .font(.system(size: 48, weight: .semibold))
+                            .foregroundColor(noiseColor(for: viewModel.noiseDB))
 
-                    Text(noiseStatusText(for: viewModel.noiseDB))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
+                        Text(noiseStatusText(for: viewModel.noiseDB))
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
 
-                // Light Level Section
-                VStack(spacing: 12) {
-                    Text("Light Level")
-                        .font(.title3)
-                        .foregroundColor(.gray)
+                    // Light Level Section
+                    VStack(spacing: 12) {
+                        Text("Light Level")
+                            .font(.title3)
+                            .foregroundColor(.gray)
 
-                    CameraPreview(session: viewModel.cameraSession)
-                        .frame(height: 200)
-                        .cornerRadius(12)
-                        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.3)))
+                        CameraPreview(session: viewModel.cameraSession)
+                            .frame(height: 200)
+                            .cornerRadius(12)
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.3)))
 
-                    Text("\(Int(viewModel.lux)) lux")
-                        .font(.system(size: 48, weight: .semibold))
-                        .foregroundColor(lightColor(for: viewModel.lux))
+                        Text("\(Int(viewModel.lux)) lux")
+                            .font(.system(size: 48, weight: .semibold))
+                            .foregroundColor(lightColor(for: viewModel.lux))
 
-                    Text(lightStatusText(for: viewModel.lux))
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
+                        Text(lightStatusText(for: viewModel.lux))
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
 
                     Spacer()
 
-                Button(action: {
-                    isMonitoring.toggle()
-                    isMonitoring ? viewModel.startMonitoring() : viewModel.stopMonitoring()
-                }) {
-                    Text(isMonitoring ? "Stop Monitoring" : "Start Monitoring")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(isMonitoring ? Color.red : Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+                    Button(action: {
+                        isMonitoring.toggle()
+                        isMonitoring ? viewModel.startMonitoring() : viewModel.stopMonitoring()
+                    }) {
+                        Text(isMonitoring ? "Stop Monitoring" : "Start Monitoring")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(isMonitoring ? Color.red : Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 40)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 40)
+                .padding()
             }
-            .padding()
+//            .navigationTitle("Live Sensor")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Log Out") {
+                        authVM.logout()
+                    }
+                    .foregroundColor(.red)
+                }
+            }
         }
-        .navigationTitle("Live Sensor")
     }
 
     // MARK: - Helper Functions

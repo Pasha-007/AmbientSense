@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var authVM: AuthViewModel
+
     var body: some View {
-        NavigationStack { // ✅ use NavigationStack for iOS 16+, or NavigationView for older versions
-            VStack(spacing: 20) {
-                NavigationLink(destination: AmbientMonitorView()) {
-                    Text("Open Ambient Monitor")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
+        NavigationView {
+            VStack {
+                Text("Welcome to AmbientSense!")
+                    .font(.title)
+                    .padding()
+
+                Button("Log Out") {
+                    authVM.logout()
                 }
+                .foregroundColor(.red)
             }
-            .padding()
-            .navigationTitle("AmbientSense")
+            .navigationTitle("Home")
         }
     }
 }
